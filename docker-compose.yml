@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+   nginx:
+       container_name: nginx
+       image: nginx:1.17.8
+       ports:
+           - 8000:80
+       volumes:
+           - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+           - ./gadi-backend:/var/www/html/api
+           - ./Logs/Nginx:/var/log/nginx
+       links:
+           - gadi_backend
+   gadi_backend:
+       build: gadi-backend
+       container_name: gadi_backend
+       volumes:
+           - ./gadi-backend:/var/www/html/api
